@@ -125,9 +125,9 @@ class _LoginScreenState extends State<LoginScreen> with UserDetailMixin {
                       await googleSigning.LogIn();
                       print(usermodel!.email);
                       print(googleSigning.user!.email);
-                      if(googleSigning.googleSignIn != null){
-                        await Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => UserList()));
-                      }
+
+                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => UserList()));
+
 
                     },
                     child: Container(

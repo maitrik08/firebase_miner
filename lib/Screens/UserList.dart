@@ -50,7 +50,7 @@ class _UserListState extends State<UserList> with UserDetailMixin {
                                       ChatList(
                                         displayName:  usertdata['displayName'].toString(),
                                         userId: user.id,
-                                        otherUserEmail: usertdata['Email'].toString(),// Pass the userId to the ChatList widget
+                                        otherUserEmail: usertdata['email'].toString(),// Pass the userId to the ChatList widget
                                       ),
                                 ),
                               );
