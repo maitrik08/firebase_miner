@@ -6,6 +6,7 @@ import 'package:firebaseminer2/Helpers/UserDetailMixin.dart';
 import 'package:firebaseminer2/Screens/Anonymous.dart';
 import 'package:firebaseminer2/Screens/UserList.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -72,10 +73,12 @@ class _LoginScreenState extends State<LoginScreen> with UserDetailMixin {
                   InkWell(
                     onTap: () async{
                       await EmailService.LogIn(email: _emailController.text, password: _passwordController.text);
-                     // if(user != null){
+                      EmailString = 'Email'.obs;
+                      print(EmailString.value);
+
+                      // if(user != null){
                         await Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => UserList()));
                      // }
-                      print('login ${auth.currentUser!.email}');
                     },
                     child: Container(
                       height: 60,
@@ -97,6 +100,9 @@ class _LoginScreenState extends State<LoginScreen> with UserDetailMixin {
                       InkWell(
                         onTap: () async{
                           EmailService.SignUp(email: _emailController.text, password: _passwordController.text);
+                          EmailString = 'Email'.obs;
+                          print(EmailString.value);
+
                           Map<String,dynamic> User = await{
                             "Email" : auth.currentUser!.email,
                             "displayName" : displayName.text,
@@ -105,9 +111,9 @@ class _LoginScreenState extends State<LoginScreen> with UserDetailMixin {
                           db.collection('USERS').add(User).then((DocumentReference doc) =>
                               print('DocumentSnapshot added with ID: ${doc.id}'));
 
-                          if(user != null){
+                          //if(user != null){
                             await Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => UserList()));
-                          }
+                          //}
                         },
                         child: Text(
                           'Sign up',
@@ -123,8 +129,8 @@ class _LoginScreenState extends State<LoginScreen> with UserDetailMixin {
                     onTap: () async{
                       GoogleSigningHelper googleSigning = GoogleSigningHelper();
                       await googleSigning.LogIn();
-                      print(usermodel!.email);
-                      print(googleSigning.user!.email);
+                      EmailString = 'email'.obs;
+                      print(EmailString.value);
 
                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => UserList()));
 
