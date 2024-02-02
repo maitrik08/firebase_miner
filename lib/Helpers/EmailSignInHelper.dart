@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebaseminer2/Helpers/UserDetailMixin.dart';
 import 'package:firebaseminer2/Helpers/UserModel.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 
 abstract class EmailSignInabstract{
  Future LogIn({required String email,required String password});
@@ -35,7 +33,6 @@ class EmailSignInHelper extends EmailSignInabstract with UserDetailMixin{
       await auth.signInWithEmailAndPassword(email: email, password: password);
       user = await auth.currentUser;
       usermodel = await UserModel(displayName: auth.currentUser!.displayName!, email: auth.currentUser!.email!, photoUrl: auth.currentUser!.photoURL!, uid: auth.currentUser!.uid);
-      EmailString = 'Email'.obs;
       return null;
     } on FirebaseAuthException catch (e) {
       return Fluttertoast.showToast(
@@ -56,9 +53,7 @@ class EmailSignInHelper extends EmailSignInabstract with UserDetailMixin{
         email: email,
         password: password,
       );
-      EmailString = 'Email'.obs;
 
-      // After successful signup, set the usermodel
       user = auth.currentUser;
       if (user != null) {
         usermodel = UserModel(
@@ -72,7 +67,6 @@ class EmailSignInHelper extends EmailSignInabstract with UserDetailMixin{
       // Return a success message
       return 'success';
     } on FirebaseAuthException catch (e) {
-      // Throw an exception with the error message
       throw Exception(e.message);
     }
   }

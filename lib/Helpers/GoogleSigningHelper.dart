@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebaseminer2/Helpers/UserDetailMixin.dart';
 import 'package:firebaseminer2/Helpers/UserModel.dart';
-import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 abstract class GoogleSigningabstract{
@@ -37,7 +36,6 @@ class GoogleSigningHelper extends GoogleSigningabstract with UserDetailMixin{
           'photoURL': user.photoURL,
         };
         usermodel ??= UserModel(displayName: user.displayName!, email: user.email!, photoUrl: user.photoURL!, uid: user.uid);
-        //usermodel = await UserModel(displayName: user.displayName!, email: user.email!, photoUrl: user.photoURL!, uid: user.uid);
         print('///////${usermodel!.email}');
         await FirebaseFirestore.instance.collection('USERS').doc(user.uid).set(userData);
       }

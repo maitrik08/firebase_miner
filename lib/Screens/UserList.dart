@@ -65,7 +65,7 @@ class _UserListState extends State<UserList> with UserDetailMixin {
                                     : null,
                                 child: usertdata['photoURL'] == null
                                     ? Text(
-                                  usertdata['Name']?[0].toUpperCase() ?? '',
+                                  usertdata['displayName']?[0].toUpperCase() ?? '',
                                   style: TextStyle(fontSize: 24),
                                 )
                                     : null,
